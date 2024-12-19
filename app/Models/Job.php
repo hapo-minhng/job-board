@@ -9,4 +9,14 @@ class Job extends Model
 {
     /** @use HasFactory<\Database\Factories\JobFactory> */
     use HasFactory;
+
+    protected $table = 'offered_jobs';
+
+    public static array $experience = ['entry', 'intermediate', 'senior'];
+    public static array $category = [
+        'IT',
+        'Finance',
+        'Sales',
+        'Marketing'
+    ];
 }
