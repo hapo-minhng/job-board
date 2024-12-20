@@ -16,7 +16,7 @@
                 <div class="mb-4 flex justify-between">
                     <div>
                         <div class="text-slate-700">
-                            <a href="{{ route('jobs.show', $otherJob->title) }}">
+                            <a href="{{ route('jobs.show', $otherJob) }}">
                                 {{ $otherJob->title }}
                             </a>
                         </div>
