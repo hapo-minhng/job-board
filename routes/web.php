@@ -17,3 +17,10 @@ Route::get('login', function () {
 
 Route::resource('auth', AuthController::class)
     ->only(['create', 'store']);
+
+Route::delete('logout', function () {
+    return to_route('auth.destroy');
+})->name('logout');
+
+Route::delete('auth', [AuthController::class, 'destroy'])
+    ->name('auth.destroy');
