@@ -9,25 +9,25 @@
 
             <div class="mb-4">
                 <x-label for="email" :required="true">E-mail</x-label>
-                <x-text-input name="email" />
+                <x-text-input name="email" id="email" />
             </div>
 
             <div class="mb-4">
                 <x-label for="password" :required="true">
                     Password
                 </x-label>
-                <x-text-input name="password" type="password" />
+                <x-text-input name="password" id="password" type="password" />
             </div>
 
             <div class="mb-4 flex justify-between text-sm font-medium">
                 <div>
                     <div class="flex items-center space-x-2">
-                        <input type="checkbox" name="remember" class="rounded-sm border border-slate-400">
+                        <input type="checkbox" name="remember" id="remember" class="rounded-sm border border-slate-400">
                         <label for="remember">Remember me</label>
                     </div>
                 </div>
                 <div>
-                    <a href="#" class="text-indigo-600 hover:underline">
+                    <a href="#" class="from-indigo-600 hover:underline">
                         Forget password?
                     </a>
                 </div>
