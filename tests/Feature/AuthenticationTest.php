@@ -44,4 +44,11 @@ class AuthenticationTest extends TestCase
         $response->assertRedirect();
         $response->assertSessionHas('error', 'Invalid credentials');
     }
+
+    public function test_invalid_login_attempt()
+    {
+        $response = $this->post('/auth', []);
+
+        $response->assertSessionHasErrors(['email', 'password']);
+    }
 }
