@@ -27,6 +27,11 @@ class Job extends Model
         return $this->belongsTo(Employer::class);
     }
 
+    public function path()
+    {
+        return "/jobs/{$this->id}";
+    }
+
     public function scopeFilter(Builder $query, array $filters): Builder
     {
         return $query->when($filters['search'] ?? null, function ($query, $search) {

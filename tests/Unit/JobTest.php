@@ -11,6 +11,18 @@ class JobTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function test_it_has_a_path()
+    {
+        $employers = Employer::factory(100)->create();
+        for ($i = 0; $i < 100; $i++) {
+            $job = Job::factory()->create([
+                'employer_id' => $employers->random()->id
+            ]);
+        }
+
+        $this->assertEquals("/jobs/{$job->id}", $job->path());
+    }
+
     public function test_get_all_jobs(): void
     {
         $employers = Employer::factory(100)->create();
