@@ -30,12 +30,12 @@
                     <x-radio-group name="experience" :options="array_combine(
                         array_map('ucfirst', \App\Models\Job::$experience),
                         \App\Models\Job::$experience,
-                    )" />
+                    )" :selected="request('experience')" />
                 </div>
                 <div>
                     <div class="mb-1 font-semibold">Category</div>
 
-                    <x-radio-group name="category" :options="\App\Models\Job::$category" />
+                    <x-radio-group name="category" :options="\App\Models\Job::$category" :selected="request('category')" />
                 </div>
             </div>
 
@@ -52,4 +52,10 @@
             </div>
         </x-job-card>
     @endforeach
+
+    @if ($jobs->count())
+        <nav class="mt-4">
+            {{ $jobs->appends(request()->query())->links() }}
+        </nav>
+    @endif
 </x-layout>
