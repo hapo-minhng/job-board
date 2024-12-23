@@ -10,6 +10,17 @@
     @endif
 
     <input x-ref="input-{{ $name }}" type="{{ $type }}" placeholder="{{ $placeholder }}"
-        name="{{ $name }}" value="{{ $value }}" id="{{ $name }}"
-        class="pr-8 w-full rounded-md border-0 py-1 px-2 text-sm ring-1 ring-slate-300 placeholder:text-slate-400 focus:ring-2" />
+        name="{{ $name }}" value="{{ old($name, $value) }}" id="{{ $name }}"
+        @class([
+            'w-full rounded-md border-0 py-1.5 px-2.5 text-sm ring-1 placeholder:text-slate-400 focus:ring-2',
+            'pr-8' => $formRef,
+            'ring-slate-300' => !$errors->has($name),
+            'ring-red-300' => $errors->has($name),
+        ]) />
+
+    @error($name)
+        <div class="mt-1 text-xs text-red-500">
+            {{ $message }}
+        </div>
+    @enderror
 </div>
