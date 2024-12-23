@@ -26,4 +26,22 @@ class AuthenticationTest extends TestCase
         $this->assertAuthenticatedAs($user);
         $response->assertRedirect('/');
     }
+
+    public function test_unsuccessful_login()
+    {
+        $user = User::factory()->create([
+            'name' => 'Minh Nguyen',
+            'email' => 'minh@ng.com',
+            'password' => bcrypt('password'),
+        ]);
+
+        $response = $this->post('/auth', [
+            'email' => 'minh@ng.com',
+            'password' => 'password123',
+        ]);
+
+        $this->assertGuest();
+        $response->assertRedirect();
+        $response->assertSessionHas('error', 'Invalid credentials');
+    }
 }
