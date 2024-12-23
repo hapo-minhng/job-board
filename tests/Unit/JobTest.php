@@ -217,4 +217,62 @@ class JobTest extends TestCase
 
         $this->assertCount(2, $filteredJobsByExperience);
     }
+
+    public function test_filter_jobs_by_category()
+    {
+        $employers = Employer::factory(3)->create();
+        $jobList = [
+            [
+                "title" => "Job A",
+                "description" => "Job A desc",
+                "salary" => 2000,
+                "location" => "NY",
+                "category" => "IT",
+                "experience" => "intermediate",
+                "employer_id" => $employers->random()->id,
+            ],
+
+            [
+                "title" => "Job B",
+                "description" => "Job B desc",
+                "salary" => 1000,
+                "location" => "Rome",
+                "category" => "Marketing",
+                "experience" => "entry",
+                "employer_id" => $employers->random()->id,
+            ],
+
+            [
+                "title" => "Job C",
+                "description" => "Job C desc",
+                "salary" => 3000,
+                "location" => "Beijing",
+                "category" => "Sales",
+                "experience" => "senior",
+                "employer_id" => $employers->random()->id,
+            ],
+
+            [
+                "title" => "Job A-1",
+                "description" => "Job A-1 desc",
+                "salary" => 5000,
+                "location" => "NY",
+                "category" => "IT",
+                "experience" => "senior",
+                "employer_id" => $employers->random()->id,
+            ]
+        ];
+
+        foreach ($jobList as $job) {
+            Job::factory()->create($job);
+        }
+
+        $filterByCategory = [
+            'category' => 'IT',
+        ];
+
+        $filteredJobsByCategory = Job::filter($filterByCategory)->get();
+
+        $this->assertCount(2, $filteredJobsByCategory);
+    }
 }
