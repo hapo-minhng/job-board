@@ -23,7 +23,7 @@ bg-gradient-to-r from-indigo-200 from-10% via-sky-200 via-30% to-emerald-200 to-
         <ul class="flex space-x-2">
             @auth
                 <li>
-                    {{ auth()->user()->name ?? 'Guest' }}
+                    {{ auth()->user()->name ?? 'Guest' }} |
                 </li>
                 <li>
                     <form action="{{ route('auth.destroy') }}" method="POST">
@@ -39,6 +39,47 @@ bg-gradient-to-r from-indigo-200 from-10% via-sky-200 via-30% to-emerald-200 to-
             @endauth
         </ul>
     </nav>
+
+    @if (session('success'))
+        <div x-data="{ flash: true }">
+            <div x-show="flash">
+                <div class="mb-4 relative rounded border border-green-500 text-green-700 bg-green-100 px-4 py-3"
+                    role="alert">
+
+                    <div><strong class="font-bold">Success!</strong></div>
+                    <div>{{ session('success') }}</div>
+
+                    <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            @click="flash = false" stroke="currentColor" class="h-6 w-6 cursor-pointer">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </span>
+                </div>
+            </div>
+        </div>
+    @endif
+
+    @if (session('error'))
+        <div x-data="{ flash: true }">
+            <div x-show="flash">
+                <div class="mb-4 relative rounded border border-red-500 text-red-700 bg-red-100 px-4 py-3"
+                    role="alert">
+
+                    <div><strong class="font-bold">Error!</strong></div>
+                    <div>{{ session('error') }}</div>
+
+                    <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            @click="flash = false" stroke="currentColor" class="h-6 w-6 cursor-pointer">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </span>
+                </div>
+            </div>
+        </div>
+    @endif
+
     {{ $slot }}
 </body>
 

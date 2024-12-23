@@ -40,7 +40,7 @@ class AuthController extends Controller
             return redirect()->intended('/');
         } else {
             return redirect()->back()
-                ->with('error', 'Invalid credentials');
+                ->with('error', 'Wrong e-mail or password!');
         }
     }
 
