@@ -16,7 +16,7 @@
                 <x-label for="password" :required="true">
                     Password
                 </x-label>
-                <x-text-input name="password" id="password" type="password" />
+                <x-text-input type="password" name="password" id="password" />
             </div>
 
             <div class="mb-4 flex justify-between text-sm font-medium">

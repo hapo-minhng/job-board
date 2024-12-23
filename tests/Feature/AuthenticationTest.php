@@ -29,7 +29,7 @@ class AuthenticationTest extends TestCase
 
     public function test_unsuccessful_login()
     {
-        $user = User::factory()->create([
+        User::factory()->create([
             'name' => 'Minh Nguyen',
             'email' => 'minh@ng.com',
             'password' => bcrypt('password'),
