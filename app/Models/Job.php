@@ -8,12 +8,11 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Auth\Authenticatable;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Job extends Model
 {
     /** @use HasFactory<\Database\Factories\JobFactory> */
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
     protected $table = 'offered_jobs';
 
