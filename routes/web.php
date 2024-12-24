@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JobController;
+use App\Http\Controllers\JobApplicationController;
 
 Route::get('/', function () {
     return redirect()->route('jobs.index');
@@ -24,3 +25,4 @@ Route::delete('logout', function () {
 
 Route::delete('auth', [AuthController::class, 'destroy'])
     ->name('auth.destroy');
+
