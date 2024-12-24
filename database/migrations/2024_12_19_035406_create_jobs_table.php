@@ -23,6 +23,7 @@ return new class extends Migration
             $table->enum('experience', Job::$experience);
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

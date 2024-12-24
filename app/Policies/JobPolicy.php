@@ -46,7 +46,7 @@ class JobPolicy
             return false;
         }
 
-        if ($job->jobApplications()->count() > 0) {
+        if ($job->jobApplication()->count() > 0) {
             return Response::deny('Cannot change the job with applications!');
         }
 
