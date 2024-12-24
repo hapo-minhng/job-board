@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Job;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,6 +15,12 @@ return new class extends Migration
     {
         Schema::create('job_applications', function (Blueprint $table) {
             $table->id();
+
+            $table->unsignedInteger('expected_salary');
+
+            $table->foreignIdFor(Job::class)->constrained();
+            $table->foreignIdFor(User::class)->constrained();
+
             $table->timestamps();
         });
     }
