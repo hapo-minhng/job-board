@@ -42,7 +42,7 @@ class AuthenticationTest extends TestCase
 
         $this->assertGuest();
         $response->assertRedirect();
-        $response->assertSessionHas('error', 'Invalid credentials');
+        $response->assertSessionHas('error', 'Wrong e-mail or password!');
     }
 
     public function test_invalid_login_attempt()
