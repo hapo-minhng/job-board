@@ -22,7 +22,7 @@ class MyJobApplicationController extends Controller
                             ->withTrashed(),
                         'job.employer'
                     ])
-                    ->latest()->get()
+                    ->latest()->paginate(10)
             ]
         );
     }
