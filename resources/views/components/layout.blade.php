@@ -23,7 +23,9 @@ bg-gradient-to-r from-indigo-200 from-10% via-sky-200 via-30% to-emerald-200 to-
         <ul class="flex space-x-2">
             @auth
                 <li>
-                    {{ auth()->user()->name ?? 'Guest' }} |
+                    <a href="{{ route('my-job-applications.index') }}">
+                        {{ auth()->user()->name ?? 'Guest' }}: Applications |
+                    </a>
                 </li>
                 <li>
                     <form action="{{ route('auth.destroy') }}" method="POST">
