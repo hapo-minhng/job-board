@@ -31,7 +31,7 @@ class ManageMyJobApplicationTest extends TestCase
         $jobApplication = $job->jobApplication()->create([
             'user_id' => $user->id,
             'expected_salary' => 5000,
-            'cv_path' => 'cvs/dummy_cv.pdf', // Example CV path
+            'cv_path' => 'cvs/dummy_cv.pdf', 
         ]);
 
         $response = $this->get(route('my-job-applications.index'));
