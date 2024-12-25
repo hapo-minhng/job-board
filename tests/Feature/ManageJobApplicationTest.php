@@ -6,8 +6,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use App\Models\Job;
 use App\Models\Employer;
-use App\Models\JobApplication;
 use App\Models\User;
+use Illuminate\Http\UploadedFile;
 
 class ManageJobApplicationTest extends TestCase
 {
@@ -18,11 +18,11 @@ class ManageJobApplicationTest extends TestCase
         $employer = Employer::factory()->create();
         $job = Job::factory()->create(['employer_id' => $employer->id]);
 
-        $response = $this->get(route('jobs.application.create', $job->id));
+        $response = $this->get(route('job.application.create', $job->id));
 
         $response->assertRedirect(route('login'));
 
-        $response = $this->post(route('jobs.application.store', $job->id), [
+        $response = $this->post(route('job.application.store', $job->id), [
             'expected_salary' => 4000,
         ]);
 
@@ -37,13 +37,14 @@ class ManageJobApplicationTest extends TestCase
         $this->actingAs($user);
 
         $employer = Employer::factory()->create();
-        $job = Job::factory()->create(['employer_id'=> $employer->id]);
+        $job = Job::factory()->create(['employer_id' => $employer->id]);
 
         $application = [
             'expected_salary' => 4000,
+            'cv' => UploadedFile::fake()->create('resume.pdf', 100, 'application/pdf'),
         ];
 
-        $response = $this->post(route('jobs.application.store', $job->id), $application);
+        $response = $this->post(route('job.application.store', $job->id), $application);
 
         $response->assertRedirect(route('jobs.show', $job->id));
 
