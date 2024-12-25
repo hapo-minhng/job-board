@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+use App\Models\Employer;
 
 class EmployerController extends Controller
 {
@@ -19,6 +21,7 @@ class EmployerController extends Controller
      */
     public function create()
     {
+        Gate::authorize('create', Employer::class);
         return view("employer.create");
     }
 
@@ -27,6 +30,7 @@ class EmployerController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('create', Employer::class);
         auth()->user()->employer()->create($request->validate([
             'company_name' => 'required|min:3|unique:employers,company_name'
         ]));

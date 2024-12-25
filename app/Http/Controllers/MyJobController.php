@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Job;
-use Illuminate\Http\Request;
 use App\Http\Requests\JobRequest;
+use Illuminate\Support\Facades\Gate;
 
 class MyJobController extends Controller
 {
@@ -13,6 +13,7 @@ class MyJobController extends Controller
      */
     public function index(Job $job)
     {
+        Gate::authorize('viewAnyEmployer', Job::class);
         return view(
             'my_job.index',
             [
@@ -29,6 +30,7 @@ class MyJobController extends Controller
      */
     public function create()
     {
+        Gate::authorize('create', Job::class);
         return view("my_job.create");
     }
 
@@ -37,6 +39,7 @@ class MyJobController extends Controller
      */
     public function store(JobRequest $request)
     {
+        Gate::authorize('create', Job::class);
         auth()->user()->employer->jobs()->create($request->validated());
 
         return redirect()->route('my-jobs.index')
@@ -56,6 +59,7 @@ class MyJobController extends Controller
      */
     public function edit(Job $myJob)
     {
+        Gate::authorize('update', $myJob);
         return view('my_job.edit', ['job' => $myJob]);
     }
 
@@ -64,6 +68,7 @@ class MyJobController extends Controller
      */
     public function update(JobRequest $request, Job $myJob)
     {
+        Gate::authorize('update', $myJob);
         $myJob->update($request->validated());
 
         return redirect()->route('my-jobs.index')
