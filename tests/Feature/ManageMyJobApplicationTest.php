@@ -31,7 +31,7 @@ class ManageMyJobApplicationTest extends TestCase
         $jobApplication = $job->jobApplication()->create([
             'user_id' => $user->id,
             'expected_salary' => 5000,
-            'cv_path' => 'cvs/dummy_cv.pdf', 
+            'cv_path' => 'cvs/dummy_cv.pdf',
         ]);
 
         $response = $this->get(route('my-job-applications.index'));
@@ -46,4 +46,26 @@ class ManageMyJobApplicationTest extends TestCase
         });
     }
 
+    public function test_user_can_delete_job_application(){
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        $employer = Employer::factory()->create();
+        $job = Job::factory()->create(['employer_id' => $employer->id]);
+
+        $jobApplication = $job->jobApplication()->create([
+            'user_id' => $user->id,
+            'expected_salary' => 5000,
+            'cv_path' => 'cvs/dummy_cv.pdf',
+        ]);
+
+        $response = $this->delete(route('my-job-applications.destroy', $jobApplication));
+
+        $response->assertRedirect();
+        $response->assertSessionHas('success', 'Job application removed!');
+
+        $this->assertDatabaseMissing('job_applications', [
+            'id' => $jobApplication->id,
+        ]);
+    }
 }

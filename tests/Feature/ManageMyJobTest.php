@@ -7,6 +7,8 @@ use Tests\TestCase;
 use App\Models\User;
 use App\Models\Employer;
 use App\Models\Job;
+use DateTime;
+use Symfony\Component\VarDumper\Cloner\Data;
 
 class ManageMyJobTest extends TestCase
 {
@@ -122,6 +124,27 @@ class ManageMyJobTest extends TestCase
             'title' => 'Job A',
             'description' => 'Job A desc',
             'salary' => 5000,
+        ]);
+    }
+
+    public function test_employer_can_delete_a_job()
+    {
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        $employer = Employer::factory()->create(['user_id' => $user->id]);
+
+        $job = Job::factory()->create([
+            'employer_id' => $employer->id,
+        ]);
+
+        $response = $this->delete(route('my-jobs.destroy', $job));
+
+        $response->assertRedirect(route('my-jobs.index'));
+        $response->assertSessionHas('success', 'Job removed!');
+
+        $this->assertDatabaseHas('offered_jobs', [
+            'deleted_at' => now(),
         ]);
     }
 }
