@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\EmployerController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\JobApplicationController;
@@ -34,5 +35,8 @@ Route::middleware('auth')->group(
 
         Route::resource('my-job-applications', MyJobApplicationController::class)
             ->only(['index', 'destroy']);
+
+        Route::resource('employer', EmployerController::class)
+            ->only(['create', 'store']);
     }
 );

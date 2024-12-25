@@ -19,7 +19,7 @@ class EmployerController extends Controller
      */
     public function create()
     {
-        //
+        return view("employer.create");
     }
 
     /**
@@ -27,7 +27,12 @@ class EmployerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        auth()->user()->employer()->create($request->validate([
+            'company_name' => 'required|min:3|unique:employers,company_name'
+        ]));
+
+        return redirect()->route('jobs.index')
+        ->with('success', 'Employer account registered successfully!');
     }
 
     /**
