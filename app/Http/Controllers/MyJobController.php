@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Job;
 use Illuminate\Http\Request;
+use App\Http\Requests\JobRequest;
 
 class MyJobController extends Controller
 {
@@ -29,15 +30,18 @@ class MyJobController extends Controller
      */
     public function create()
     {
-        //
+        return view("my_job.create");
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(JobRequest $request)
     {
-        //
+        auth()->user()->employer->jobs()->create($request->validated());
+
+        return redirect()->route('my-jobs.index')
+        ->with('success', 'Job created successfully!');
     }
 
     /**
