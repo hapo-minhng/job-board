@@ -6,6 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use App\Models\User;
 use App\Models\Employer;
+use App\Models\Job;
 
 class ManageMyJobTest extends TestCase
 {
@@ -72,6 +73,55 @@ class ManageMyJobTest extends TestCase
             'category' => 'IT',
             'experience' => 'intermediate',
             'employer_id' => $employer->id,
+        ]);
+    }
+
+    public function test_employer_can_update_a_job()
+    {
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        $employer = Employer::factory()->create(['user_id' => $user->id]);
+
+        $job = Job::factory()->create([
+            'title' => 'Job A',
+            'description' => 'Job A desc',
+            'location' => 'NY',
+            'salary' => 5000,
+            'category' => 'IT',
+            'experience' => 'intermediate',
+            'employer_id' => $employer->id,
+        ]);
+
+        $updatedJob = [
+            'title' => 'Job B',
+            'description' => 'Job B desc',
+            'location' => 'NY',
+            'salary' => 6000,
+            'category' => 'IT',
+            'experience' => 'intermediate',
+            'employer_id' => $employer->id,
+        ];
+
+        $response = $this->put(route('my-jobs.update', $job), $updatedJob);
+
+        $response->assertRedirect(route('my-jobs.index'));
+        $response->assertSessionHas('success', 'Job updated successfully!');
+
+        $this->assertDatabaseHas('offered_jobs', [
+            'title' => 'Job B',
+            'description' => 'Job B desc',
+            'location' => 'NY',
+            'salary' => 6000,
+            'category' => 'IT',
+            'experience' => 'intermediate',
+            'employer_id' => $employer->id,
+        ]);
+
+        $this->assertDatabaseMissing('offered_jobs', [
+            'title' => 'Job A',
+            'description' => 'Job A desc',
+            'salary' => 5000,
         ]);
     }
 }
