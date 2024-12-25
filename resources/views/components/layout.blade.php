@@ -24,11 +24,11 @@ bg-gradient-to-r from-indigo-200 from-10% via-sky-200 via-30% to-emerald-200 to-
             @auth
                 <li>
                     <a href="{{ route('my-job-applications.index') }}">
-                        {{ auth()->user()->name ?? 'Guest' }}: Applications |
+                        {{ auth()->user()->name ?? 'Guest' }}: My Applications |
                     </a>
                 </li>
                 <li>
-                    <a href="{{route('employer.create')}}">Register as Employer |</a>
+                    <a href="{{route('my-jobs.index')}}">My Jobs |</a>
                 </li>
                 <li>
                     <form action="{{ route('auth.destroy') }}" method="POST">
