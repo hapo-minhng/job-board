@@ -38,5 +38,7 @@ class ManageMyJobTest extends TestCase
         $response = $this->get(route("my-jobs.index"));
 
         $response->assertStatus(200);
+
+        $response->assertViewIs("my_job.index");
     }
 }

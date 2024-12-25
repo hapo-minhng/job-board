@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Job;
 use Illuminate\Http\Request;
 
 class MyJobController extends Controller
@@ -9,9 +10,18 @@ class MyJobController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Job $job)
     {
-        //
+        return view(
+            'my_job.index',
+            [
+                'jobs' => auth()->user()->employer
+                    ->jobs()
+                    ->with(['employer', 'jobApplications', 'jobApplications.user'])
+                    ->withTrashed()
+                    ->get()
+            ]
+        );
     }
 
     /**
