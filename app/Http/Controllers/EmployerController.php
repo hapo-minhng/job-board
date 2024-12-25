@@ -32,7 +32,7 @@ class EmployerController extends Controller
         ]));
 
         return redirect()->route('jobs.index')
-        ->with('success', 'Employer account registered successfully!');
+            ->with('success', 'Employer account registered successfully!');
     }
 
     /**

@@ -13,7 +13,7 @@
 <body
     class="mx-auto mt-10 max-w-2xl text-slate-700
 bg-gradient-to-r from-indigo-200 from-10% via-sky-200 via-30% to-emerald-200 to-90%">
-    <nav class="mb-8 flex justify-between text-lg font-medium">
+    <nav class="mb-8 flex justify-between text-md font-medium">
         <ul class="flex space-x-2">
             <li>
                 <a href="{{ route('jobs.index') }}">Home</a>
@@ -28,10 +28,13 @@ bg-gradient-to-r from-indigo-200 from-10% via-sky-200 via-30% to-emerald-200 to-
                     </a>
                 </li>
                 <li>
+                    <a href="{{route('employer.create')}}">Register as Employer |</a>
+                </li>
+                <li>
                     <form action="{{ route('auth.destroy') }}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button>Logout</button>
+                        <button>⍈ Logout</button>
                     </form>
                 </li>
             @else
