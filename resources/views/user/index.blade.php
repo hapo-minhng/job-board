@@ -1,61 +1,61 @@
 <x-layout>
-    <x-breadcrumbs class="mb-4" :links="['Users' => route('user.index')]" />
+    <x-breadcrumbs class="mb-4" :links="['User' => route('user.index')]" />
 
     <x-card class="mb-4 text-sm" x-data="">
-        <form x-ref="filters" action="{{ route('jobs.index') }}" method="GET">
-            <div class="mb-4 grid grid-cols-2 gap-4">
-                <div>
-                    <div class="mb-1 font-semibold">
-                        Jobs
-                    </div>
-                    <x-text-input name="search" value="{{ request('search') }}" placeholder="Search for any text"
-                        form-ref="filters" />
+        <div class="flex">
+            <div class="mb-4 mt-4 ml-4">
+                <div class="mb-2 font-bold text-2xl">
+                    User Profile
                 </div>
 
-                {{-- <div>
-                    <div class="mb-1 font-semibold">
-                        Salary
+                <div class="grid grid-cols-4 mb-2">
+                    <div>
+                        Username:
                     </div>
 
-                    <div class="flex space-x-2">
-                        <x-text-input name="min_salary" value="{{ request('min_salary') }}" placeholder="From"
-                            form-ref="filters" />
-                        <x-text-input name="max_salary" value="{{ request('max_salary') }}" placeholder="To"
-                            form-ref="filters" />
+                    <div>
+                        {{ auth()->user()->name }}
                     </div>
                 </div>
-                <div>
-                    <div class="mb-1 font-semibold">Experience</div>
 
-                    <x-radio-group name="experience" :options="array_combine(
-                        array_map('ucfirst', \App\Models\Job::$experience),
-                        \App\Models\Job::$experience,
-                    )" :selected="request('experience')" />
+                <div class="grid grid-cols-4 mb-2">
+                    <div>
+                        Email:
+                    </div>
+
+                    <div>
+                        {{ auth()->user()->email }}
+                    </div>
                 </div>
-                <div>
-                    <div class="mb-1 font-semibold">Category</div>
 
-                    <x-radio-group name="category" :options="\App\Models\Job::$category" :selected="request('category')" />
+                <div class="grid grid-cols-4 mb-2">
+                    <div>
+                        Joined at:
+                    </div>
+
+                    <div>
+                        {{ auth()->user()->created_at->format('Y-m-d') }}
+                    </div>
                 </div>
             </div>
 
-            <x-button class="w-full">Filter</x-button>
-        </form> --}}
+            <div class="mb-4 mt-4">
+                <div class="rounded-md border border-slate-500 px-10 py-12">
+                    <svg class="w-20 h-20 text-gray-800 dark:text-white" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                        viewBox="0 0 24 24">
+                        <path fill-rule="evenodd"
+                            d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4h-4Z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </div>
+
+                <div class="text-center mt-3 font-semibold">
+                    Profile Image
+                </div>
+            </div>
+        </div>
+
+        <x-link-button href="{{ route('user.edit', auth()->user()) }}">Edit Profile</x-link-button>
     </x-card>
-
-    {{-- @foreach ($jobs as $job)
-        <x-job-card class="mb-4" :job="$job">
-            <div class="mt-4">
-                <x-link-button :href="route('jobs.show', $job)">
-                    Show Details
-                </x-link-button>
-            </div>
-        </x-job-card>
-    @endforeach
-
-    @if ($jobs->count())
-        <nav class="mt-4">
-            {{ $jobs->appends(request()->query())->links() }}
-        </nav>
-    @endif --}}
 </x-layout>

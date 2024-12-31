@@ -61,6 +61,12 @@ bg-gradient-to-r from-indigo-200 from-10% via-sky-200 via-30% to-emerald-200 to-
                                 style="display: none;">
                                 <ul class="py-2 text-sm text-gray-700 dark:text-gray-400">
                                     <li>
+                                        <a href="{{ route('user.index') }}"
+                                            class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                            My Profile</a>
+                                    </li>
+
+                                    <li>
                                         <a href="{{ route('my-job-applications.index') }}"
                                             class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                             My Applications</a>
