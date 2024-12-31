@@ -7,6 +7,7 @@ use App\Http\Controllers\JobController;
 use App\Http\Controllers\JobApplicationController;
 use App\Http\Controllers\MyJobApplicationController;
 use App\Http\Controllers\MyJobController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return redirect()->route('jobs.index');
@@ -41,5 +42,8 @@ Route::middleware('auth')->group(
 
         Route::middleware('employer')
             ->resource('my-jobs', MyJobController::class);
+
+        Route::resource('user', UserController::class)
+            ->only(['edit', 'update']);
     }
 );
