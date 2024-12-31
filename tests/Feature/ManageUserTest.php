@@ -15,14 +15,4 @@ class ManageUserTest extends TestCase
 
         $response->assertRedirect(route("login"));
     }
-
-    // public function test_user_can_manage_user_info(): void
-    // {
-    //     $user = User::factory()->create();
-    //     $this->actingAs($user);
-
-    //     $response = $this->get(route("user.index"));
-
-    //     $response->assertViewIs("user.index");
-    // }
 }
