@@ -46,6 +46,7 @@ bg-gradient-to-r from-indigo-200 from-10% via-sky-200 via-30% to-emerald-200 to-
                             <button @click="dropdownOpen = !dropdownOpen"
                                 class="flex items-center justify-between w-full py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
                                 {{ auth()->user()->name ?? 'Guest' }}
+
                                 <svg class="ml-2 w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
                                     xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
                                     <path fill-rule="evenodd"
@@ -64,12 +65,14 @@ bg-gradient-to-r from-indigo-200 from-10% via-sky-200 via-30% to-emerald-200 to-
                                             class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                             My Applications</a>
                                     </li>
+
                                     <li>
                                         <a href="{{ route('my-jobs.index') }}"
                                             class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                             My Jobs</a>
                                     </li>
                                 </ul>
+
                                 <div class="py-1">
                                     <form action="{{ route('auth.destroy') }}" method="POST"
                                         class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">

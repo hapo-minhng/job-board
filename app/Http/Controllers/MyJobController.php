@@ -11,7 +11,7 @@ class MyJobController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Job $job)
+    public function index()
     {
         Gate::authorize('viewAnyEmployer', Job::class);
         return view(
