@@ -3,8 +3,8 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\Models\User;
 
 class ManageUserTest extends TestCase
 {
@@ -14,5 +14,15 @@ class ManageUserTest extends TestCase
         $response = $this->get(route("user.edit"));
 
         $response->assertRedirect(route("login"));
+    }
+
+    public function test_user_can_manage_user_info(): void
+    {
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        $response = $this->get(route("user.index"));
+
+        $response->assertViewIs("user.index");
     }
 }
