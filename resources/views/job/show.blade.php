@@ -18,9 +18,9 @@
         @else
             <div class="mt-4 text-center text-sm font-medium text-slate-500">
                 You have to
-                <a href="{{route('auth.create')}}" class="text-indigo-600 hover:underline">
-                        login
-                    </a> to apply for this job!
+                <a href="{{ route('auth.create') }}" class="text-indigo-600 hover:underline">
+                    login
+                </a> to apply for this job!
             </div>
         @endauth
     </x-job-card>
