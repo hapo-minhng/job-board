@@ -43,7 +43,6 @@ Route::middleware('auth')->group(
         Route::middleware('employer')
             ->resource('my-jobs', MyJobController::class);
 
-        Route::resource('user', UserController::class)
-            ->only(['edit', 'update']);
+        Route::resource('user', UserController::class);
     }
 );

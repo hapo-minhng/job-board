@@ -7,8 +7,6 @@ use Tests\TestCase;
 use App\Models\User;
 use App\Models\Employer;
 use App\Models\Job;
-use DateTime;
-use Symfony\Component\VarDumper\Cloner\Data;
 
 class ManageMyJobTest extends TestCase
 {
