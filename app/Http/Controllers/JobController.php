@@ -20,6 +20,7 @@ class JobController extends Controller
             "max_salary",
             "experience",
             "category",
+            "salary_order",
         ]);
 
         return view('job.index', ['jobs' => Job::with('employer')
