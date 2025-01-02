@@ -24,6 +24,9 @@
                             form-ref="filters" />
                     </div>
                 </div>
+            </div>
+
+            <div class="mb-4 grid grid-cols-3 gap-4">
                 <div>
                     <div class="mb-1 font-semibold">Experience</div>
 
@@ -36,6 +39,11 @@
                     <div class="mb-1 font-semibold">Category</div>
 
                     <x-radio-group name="category" :options="\App\Models\Job::$category" :selected="request('category')" />
+                </div>
+                <div>
+                    <div class="mb-1 font-semibold">Order by Salary</div>
+
+                    <x-radio-group name="salary_order" :options="['Low to High' => 'asc', 'High to Low' => 'desc']" :selected="request('salary_order')" />
                 </div>
             </div>
 

@@ -76,6 +76,8 @@ class Job extends Model
             $query->where('experience', $experience);
         })->when($filters['category'] ?? null, function ($query, $category) {
             $query->where('category', $category);
+        })->when($filters['salary_order'] ?? null, function($query, $orderBy) {
+            $query->orderBy('salary', $orderBy);
         });
     }
 }
