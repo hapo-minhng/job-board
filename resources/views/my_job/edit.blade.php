@@ -1,7 +1,7 @@
 <x-layout>
     <x-breadcrumbs :links="['My Jobs' => route('my-jobs.index'), 'Edit Job' => '#']" class="mb-4" />
 
-    <x-card class="mb-8">
+    <x-card class="mb-8" x-data="">
         <form action="{{ route('my-jobs.update', $job) }}" method="POST">
             @csrf
             @method('PUT')
@@ -41,9 +41,11 @@
                 </div>
 
                 <div class="col-span-2">
-                    <x-button class="w-full">Edit Job</x-button>
+                    <x-button class="w-full" @click.prevent="$dispatch('toggle-confirmation-popup')">Edit Job</x-button>
                 </div>
             </div>
+
+            <x-popup />
         </form>
     </x-card>
 </x-layout>
