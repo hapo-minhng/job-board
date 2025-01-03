@@ -2,7 +2,7 @@
     <x-breadcrumbs class="mb-4" :links="['User' => route('user.index'), 'Edit Profile' => '#']" />
 
     <x-card class="mb-4 text-sm" x-data="">
-        <form x-ref="filters" action="{{ route('user.update', auth()->user()) }}" method="POST">
+        <form action="{{ route('user.update', auth()->user()) }}" method="POST">
             @csrf
             @method('PUT')
 
@@ -55,7 +55,12 @@
                 </div>
             </div>
 
-            <x-button>Save</x-button>
+            <x-button
+                @click.prevent="$dispatch('toggle-confirmation-popup')">
+                Save
+            </x-button>
+
+            <x-popup />
         </form>
     </x-card>
 </x-layout>
