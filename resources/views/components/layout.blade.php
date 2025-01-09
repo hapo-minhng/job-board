@@ -8,8 +8,6 @@
     <title>Laravel Job Board</title>
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
-
-    @livewireStyles
 </head>
 
 <body
@@ -182,7 +180,6 @@ bg-gradient-to-r from-indigo-200 from-10% via-sky-200 via-30% to-emerald-200 to-
     @endif
 
     {{ $slot }}
-    @livewireScripts
 </body>
 
 </html>

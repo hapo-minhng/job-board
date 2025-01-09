@@ -26,13 +26,15 @@
                     <div>No applications yet</div>
                 @endforelse
 
-                <div class="flex space-x-2">
+                <div class="flex space-x-2" x-data="">
                     <x-link-button href="{{ route('my-jobs.edit', $job) }}">Edit</x-link-button>
 
                     <form action="{{ route('my-jobs.destroy', $job) }}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <x-button>Delete</x-button>
+                        <x-button @click.prevent="$dispatch('toggle-confirmation-popup')">Delete</x-button>
+
+                        <x-popup />
                     </form>
                 </div>
             </div>
